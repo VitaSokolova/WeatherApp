@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/city_vh_container"
+    android:layout_width="match_parent"
+    android:layout_height="147dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardCornerRadius="18dp"
+    tools:backgroundTint="@android:color/holo_green_dark"
+    tools:layout_height="147dp"
+    tools:layout_width="156dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/city_vh_city_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:textAppearance="@style/Text.Bold.16.PrimaryColor"
+            tools:text="Воронеж" />
+
+        <TextView
+            android:id="@+id/city_vh_country_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Text.Regular.14.PrimaryColor"
+            tools:text="Россия" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

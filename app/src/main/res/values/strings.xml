@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+
+    <string name="cities_list_title">Города</string>
 </resources>
