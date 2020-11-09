@@ -2,4 +2,41 @@
     <string name="app_name">WeatherApp</string>
 
     <string name="cities_list_title">Города</string>
+    <string name="title_activity_weather_in_city">WeatherInCityActivity</string>
+
+    <string name="humidity">Влажность</string>
+    <string name="air_pressure">Давление, мм рт. ст.</string>
+    <string name="wind">Ветер, м/с</string>
+    <string name="visibility">Видимость, км</string>
+
+    <string name="degree_format">%d°</string>
+
+    <string name="monday">Понедельник</string>
+    <string name="tuesday">Вторник</string>
+    <string name="wednesday">Среда</string>
+    <string name="thursday">Четверг</string>
+    <string name="friday">Пятница</string>
+    <string name="sunday">Суббота</string>
+    <string name="saturday">Воскресенье</string>
+
+    <string name="clear_weather_state">Солнечно</string>
+    <string name="light_clouds_weather_state">Малооблачно</string>
+    <string name="heavy_clouds_weather_state">Сильная облачность</string>
+    <string name="rain_weather_state">Дождь</string>
+    <string name="snow_weather_state">Снег</string>
+    <string name="thunder_weather_state">Гроза</string>
+
+    <string name="wind_abbreviation_north">С</string>
+    <string name="wind_abbreviation_northeast">СВ</string>
+    <string name="wind_abbreviation_east">В</string>
+    <string name="wind_abbreviation_southeast">ЮВ</string>
+    <string name="wind_abbreviation_south">Ю</string>
+    <string name="wind_abbreviation_southwest">ЮЗ</string>
+    <string name="wind_abbreviation_west">З</string>
+    <string name="wind_abbreviation_northwest">СЗ</string>
+
+    <string name="min_max_text_format">Макс. %.0f°, мин.  %.0f°</string>
+    
+    <string name="loading_text">Погода загружается</string>
+    <string name="error_text">Произошла ошибка.\nПопробуйте позже.</string>
 </resources>

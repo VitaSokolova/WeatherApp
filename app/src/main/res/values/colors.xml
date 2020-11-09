@@ -4,4 +4,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white40">#66FFFFFF</color>
+    <color name="black20">#33000000</color>
+    <color name="black50">#80000000</color>
+
+    <color name="thunder">#515A78</color>
+    <color name="rain">#2C334B</color>
+    <color name="heavy_clouds">#28333C</color>
+    <color name="light_clouds">#012E56</color>
+    <color name="sunny">#8C817A</color>
+    <color name="fog">#4B4F5D</color>
+    <color name="snow">#4F6979</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
 </resources>

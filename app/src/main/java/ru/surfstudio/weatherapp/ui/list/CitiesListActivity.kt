@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.surfstudio.weatherapp.R
+import ru.surfstudio.weatherapp.ui.city.WeatherInCityRoute
 import ru.surfstudio.weatherapp.ui.list.recycler.CitiesListAdapter
 import ru.surfstudio.weatherapp.ui.list.recycler.SpacesItemDecoration
 import java.util.logging.Logger
@@ -51,7 +52,7 @@ class CitiesListActivity : AppCompatActivity() {
     private fun initListeners() {
         adapter.onItemClickListener = { city ->
             // todo: переход на экран с погодой в городе
-            Log.v("MY TAG", "$city")
+            startActivity(WeatherInCityRoute(city).getIntent(this))
         }
     }
 

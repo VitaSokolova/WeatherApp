@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <TextView
+        android:id="@+id/day_of_week_forecast_title_tv"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:textAppearance="@style/Text.Regular.16.PrimaryColor"
+        tools:text="Понедельник" />
+
+    <ImageView
+        android:id="@+id/day_of_week_forecast_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="50dp"
+        tools:src="@drawable/ic_clouds" />
+
+    <TextView
+        android:id="@+id/day_of_week_day_temperature_tv"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:gravity="end"
+        android:textAppearance="@style/Text.Regular.18.PrimaryColor"
+        tools:text="21°" />
+
+    <TextView
+        android:id="@+id/day_of_week_night_temperature_tv"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="end"
+        android:textAppearance="@style/Text.Regular.18.SecondaryColor"
+        tools:text="10°" />
+
+</merge>

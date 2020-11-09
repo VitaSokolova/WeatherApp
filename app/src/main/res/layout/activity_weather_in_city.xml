@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_in_city_root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/heavy_clouds"
+    android:orientation="vertical"
+    tools:context=".ui.city.WeatherInCityActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black20" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/weather_in_city_temperature_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/Text.Bold.100.PrimaryColor"
+                tools:text="21°" />
+
+            <TextView
+                android:id="@+id/weather_in_city_description_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/Text.Regular.18.PrimaryColor"
+                tools:text="Малооблачно" />
+
+            <TextView
+                android:id="@+id/weather_in_city_min_max_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/Text.Regular.14.PrimaryColor"
+                tools:text="Макс. 21°, мин.  11°" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="90dp"
+                android:layout_marginEnd="24dp"
+                app:cardBackgroundColor="@color/black50"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
+                        android:id="@+id/weather_in_city_humidity_param"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_weight="1"
+                        app:hintText="@string/humidity"
+                        app:layout_constraintBottom_toTopOf="@id/weather_in_city_wind_param"
+                        app:layout_constraintEnd_toStartOf="@id/weather_in_city_air_pressure_param"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
+                        android:id="@+id/weather_in_city_air_pressure_param"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_weight="1"
+                        app:hintText="@string/air_pressure"
+                        app:layout_constraintBottom_toTopOf="@id/weather_in_city_visibility_param"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/weather_in_city_humidity_param"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
+                        android:id="@+id/weather_in_city_wind_param"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:hintText="@string/wind"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/weather_in_city_visibility_param"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/weather_in_city_humidity_param" />
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
+                        android:id="@+id/weather_in_city_visibility_param"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:hintText="@string/visibility"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/weather_in_city_wind_param"
+                        app:layout_constraintTop_toBottomOf="@id/weather_in_city_air_pressure_param" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="26dp"
+                app:cardBackgroundColor="@color/black50"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="22dp"
+                    android:orientation="vertical">
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
+                        android:id="@+id/weather_in_city_forecast_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp" />
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
+                        android:id="@+id/weather_in_city_forecast_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp" />
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
+                        android:id="@+id/weather_in_city_forecast_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp" />
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
+                        android:id="@+id/weather_in_city_forecast_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp" />
+
+                    <ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
+                        android:id="@+id/weather_in_city_forecast_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

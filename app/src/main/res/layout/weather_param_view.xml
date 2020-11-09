@@ -1,0 +1,37 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <ru.surfstudio.weatherapp.ui.city.customviews.ProgressBar
+        android:id="@+id/weather_param_pb"
+        style="@style/ProgressBarStyle"
+        android:layout_width="4dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp" />
+
+    <TextView
+        android:id="@+id/weather_param_hint_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/weather_param_pb"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/Text.Regular.12.SecondaryColor"
+        tools:text="Влажность" />
+
+    <TextView
+        android:id="@+id/weather_param_value_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weather_param_hint_tv"
+        android:layout_toEndOf="@+id/weather_param_pb"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/Text.Regular.18.PrimaryColor"
+        tools:text="56%" />
+
+</merge>

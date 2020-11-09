@@ -115,4 +115,12 @@
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
+    <style name="Text.Bold.100">
+        <item name="android:textSize">100sp</item>
+    </style>
+
+    <style name="Text.Bold.100.PrimaryColor">
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
 </resources>
