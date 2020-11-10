@@ -41,9 +41,10 @@
 
             <TextView
                 android:id="@+id/weather_in_city_description_tv"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:drawablePadding="12dp"
                 android:textAppearance="@style/Text.Regular.18.PrimaryColor"
                 tools:text="Малооблачно" />
 

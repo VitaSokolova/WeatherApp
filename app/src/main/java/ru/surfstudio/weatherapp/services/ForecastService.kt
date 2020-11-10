@@ -10,5 +10,5 @@ import ru.surfstudio.weatherapp.services.dto.SixDaysForecastDto
 
 public interface ForecastService {
     @GET(FORECAST_URL)
-    fun getFiveDaysForecast(@Path("cityId") cityId: String?): Call<SixDaysForecastDto>
+    fun getFiveDaysForecast(@Path("cityId") cityId: String?): Single<SixDaysForecastDto>
 }

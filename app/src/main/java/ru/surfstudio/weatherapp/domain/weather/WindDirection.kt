@@ -1,5 +1,8 @@
 package ru.surfstudio.weatherapp.domain.weather
 
+/**
+ *  Направление ветра
+ */
 enum class WindDirection {
     NORTH,
     NORTHEAST,
@@ -11,7 +14,6 @@ enum class WindDirection {
     NORTHWEST;
 
     companion object {
-
         fun getByDegrees(degrees: Double): WindDirection {
           return when {
                 (degrees in 337.5..360.0) || (degrees in .0..22.5) -> NORTH

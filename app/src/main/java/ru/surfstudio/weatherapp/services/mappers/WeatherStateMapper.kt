@@ -4,6 +4,9 @@ import ru.surfstudio.weatherapp.domain.weather.WeatherState
 
 object WeatherStateMapper {
 
+    /**
+     * Метод для перевода констант сервера в доменную модель с типами погоды
+     */
     fun map(value:String): WeatherState {
         return when (value) {
             "c" -> WeatherState.CLEAR

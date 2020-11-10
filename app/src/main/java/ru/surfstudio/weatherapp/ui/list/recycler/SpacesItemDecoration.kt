@@ -5,12 +5,15 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
-
-class SpacesItemDecoration(private val space: Int, val columnsCount: Int) : ItemDecoration() {
+/**
+ * Декоратор, для добавления отступов между ячейками в сетке
+ */
+class SpacesItemDecoration(
+    private val space: Int,
+    private val columnsCount: Int
+) : ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, itemPosition: Int, parent: RecyclerView) {
-        outRect.left = space / 2
-        outRect.right = space / 2
         val totalCount = parent.adapter?.itemCount ?: 0
 
         if (itemPosition in 0 until columnsCount) {

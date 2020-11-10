@@ -10,6 +10,9 @@ import ru.surfstudio.weatherapp.domain.converters.PressureConverter
 import ru.surfstudio.weatherapp.domain.converters.SpeedConverter
 import ru.surfstudio.weatherapp.services.mappers.WeatherStateMapper
 
+/**
+ * Модель для маппинга прогноза погоды на день
+ */
 class DailyForecastDto(
     @SerializedName("applicable_date")
     val date: String,

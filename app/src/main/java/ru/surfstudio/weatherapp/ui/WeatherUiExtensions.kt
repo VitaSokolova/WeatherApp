@@ -8,20 +8,6 @@ import ru.surfstudio.weatherapp.R
 import ru.surfstudio.weatherapp.domain.weather.WeatherState
 import ru.surfstudio.weatherapp.domain.weather.WindDirection
 
-fun DayOfWeek.getName(context: Context): String {
-    return context.resources.getString(
-        when (this) {
-            DayOfWeek.MONDAY -> R.string.monday
-            DayOfWeek.TUESDAY -> R.string.tuesday
-            DayOfWeek.WEDNESDAY -> R.string.wednesday
-            DayOfWeek.THURSDAY -> R.string.thursday
-            DayOfWeek.FRIDAY -> R.string.friday
-            DayOfWeek.SATURDAY -> R.string.sunday
-            DayOfWeek.SUNDAY -> R.string.saturday
-        }
-    )
-}
-
 fun WeatherState.getWeatherDescription(context: Context): String {
     return context.resources.getString(
         when (this) {

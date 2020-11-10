@@ -9,13 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import org.threeten.bp.LocalDate
 import ru.surfstudio.weatherapp.R
 import ru.surfstudio.weatherapp.domain.weather.DailyForecast
-import ru.surfstudio.weatherapp.domain.common.Error
-import ru.surfstudio.weatherapp.domain.common.Loading
-import ru.surfstudio.weatherapp.domain.common.Normal
-import ru.surfstudio.weatherapp.domain.weather.SixDaysForecast
 import ru.surfstudio.weatherapp.ui.*
 import ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
 import ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
+import ru.surfstudio.weatherapp.ui.city.models.CityForecast
+import ru.surfstudio.weatherapp.ui.common.LoadStatus
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
@@ -99,10 +97,10 @@ class WeatherInCityActivity : AppCompatActivity() {
         })
 
         viewModel.forecast.observe(this, { forecast ->
-            when (forecast.loadableData) {
-                is Normal -> renderData(forecast)
-                is Loading -> renderLoading()
-                is Error -> renderError()
+            when (forecast.loadStatus) {
+                LoadStatus.NORMAL -> renderData(forecast)
+                LoadStatus.LOADING -> renderLoading()
+                LoadStatus.ERROR -> renderError()
             }
         }
         )
@@ -124,14 +122,14 @@ class WeatherInCityActivity : AppCompatActivity() {
         descriptionTv.text = resources.getString(R.string.error_text)
     }
 
-    private fun renderData(forecast: SixDaysForecast) {
+    private fun renderData(forecast: CityForecast) {
         forecast.getTodayForecast()?.let {
             renderTodayWeather(it)
         }
         renderOtherDaysForecasts(forecast)
     }
 
-    private fun renderOtherDaysForecasts(forecast: SixDaysForecast) {
+    private fun renderOtherDaysForecasts(forecast: CityForecast) {
         forecast.getOtherDaysForecast().forEachIndexed { index, dailyForecast ->
             forecastsViews[index].renderParams(
                 dailyForecast.date.dayOfWeek.getName(this),
@@ -143,18 +141,15 @@ class WeatherInCityActivity : AppCompatActivity() {
     }
 
     private fun renderTodayWeather(it: DailyForecast) {
+        rootContainer.background = it.weatherState.getWeatherBackground(this)
+
         temperatureTv.text = resources.getString(
             R.string.degree_format,
             it.dayTemperature.roundToInt()
         )
 
         descriptionTv.text = it.weatherState.getWeatherDescription(this)
-        descriptionTv.setCompoundDrawables(
-            it.weatherState.getWeatherIcon(this),
-            null,
-            null,
-            null
-        )
+        descriptionTv.setStartCompoundDrawable(it.weatherState.getWeatherIcon(this))
 
         minMaxTv.text = resources.getString(
             R.string.min_max_text_format,
@@ -162,7 +157,6 @@ class WeatherInCityActivity : AppCompatActivity() {
             it.nightTemperature
         )
 
-        rootContainer.background = it.weatherState.getWeatherBackground(this)
         humidityTv.renderParams(
             "${it.humidity}%",
             it.humidity / 100.0
