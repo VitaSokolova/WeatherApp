@@ -19,8 +19,6 @@ import kotlin.math.roundToInt
 
 class WeatherInCityActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: WeatherInCityViewModel
-
     private lateinit var toolbar: Toolbar
     private lateinit var rootContainer: ViewGroup
     private lateinit var temperatureTv: TextView
@@ -42,20 +40,12 @@ class WeatherInCityActivity : AppCompatActivity() {
 
     private lateinit var forecastsViews: List<DayOfWeekForecastView>
 
-    private val decimalFormat = DecimalFormat().apply { maximumFractionDigits = 2 }
-    private val intFormat = DecimalFormat().apply { maximumFractionDigits = 0 }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_in_city)
-        val route = WeatherInCityRoute.fromIntent(intent)
-        viewModel = ViewModelProvider(this, WeatherInCityViewModelFactory(route.city)).get(
-            WeatherInCityViewModel::class.java
-        )
 
         findViews()
         initListeners()
-        observeViewModel()
     }
 
     private fun findViews() {
@@ -89,89 +79,5 @@ class WeatherInCityActivity : AppCompatActivity() {
 
     private fun initListeners() {
         toolbar.setNavigationOnClickListener { finish() }
-    }
-
-    private fun observeViewModel() {
-        viewModel.city.observe(this, { city ->
-            toolbar.title = city.name
-        })
-
-        viewModel.forecast.observe(this, { forecast ->
-            when (forecast.loadStatus) {
-                LoadStatus.NORMAL -> renderData(forecast)
-                LoadStatus.LOADING -> renderLoading()
-                LoadStatus.ERROR -> renderError()
-            }
-        }
-        )
-    }
-
-    private fun renderLoading() {
-        descriptionTv.text = resources.getString(R.string.loading_text)
-
-        weatherParamsViews.forEach { it.renderEmptyState() }
-
-        val today = LocalDate.now()
-        forecastsViews.forEachIndexed { i, view ->
-            val dayName = today.plusDays(i + 1L).dayOfWeek.getName(this@WeatherInCityActivity)
-            view.renderEmptyState(dayName)
-        }
-    }
-
-    private fun renderError() {
-        descriptionTv.text = resources.getString(R.string.error_text)
-    }
-
-    private fun renderData(forecast: CityForecast) {
-        forecast.getTodayForecast()?.let {
-            renderTodayWeather(it)
-        }
-        renderOtherDaysForecasts(forecast)
-    }
-
-    private fun renderOtherDaysForecasts(forecast: CityForecast) {
-        forecast.getOtherDaysForecast().forEachIndexed { index, dailyForecast ->
-            forecastsViews[index].renderParams(
-                dailyForecast.date.dayOfWeek.getName(this),
-                dailyForecast.weatherState.getWeatherIcon(this),
-                dailyForecast.dayTemperature.roundToInt(),
-                dailyForecast.nightTemperature.roundToInt()
-            )
-        }
-    }
-
-    private fun renderTodayWeather(it: DailyForecast) {
-        rootContainer.background = it.weatherState.getWeatherBackground(this)
-
-        temperatureTv.text = resources.getString(
-            R.string.degree_format,
-            it.dayTemperature.roundToInt()
-        )
-
-        descriptionTv.text = it.weatherState.getWeatherDescription(this)
-        descriptionTv.setStartCompoundDrawable(it.weatherState.getWeatherIcon(this))
-
-        minMaxTv.text = resources.getString(
-            R.string.min_max_text_format,
-            it.dayTemperature,
-            it.nightTemperature
-        )
-
-        humidityTv.renderParams(
-            "${it.humidity}%",
-            it.humidity / 100.0
-        )
-        airPressureTv.renderParams(
-            decimalFormat.format(it.airPressure),
-            it.getAirPressureInPercents()
-        )
-        windTv.renderParams(
-            "${it.windDirection.getAbbreviation(this)}, ${intFormat.format(it.windSpeed)}",
-            it.getWindSpeedInPercents()
-        )
-        visibilityTv.renderParams(
-            intFormat.format(it.visibility),
-            it.getWindVisibilityInPercents()
-        )
     }
 }
