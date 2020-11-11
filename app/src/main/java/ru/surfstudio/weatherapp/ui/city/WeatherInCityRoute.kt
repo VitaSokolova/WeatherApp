@@ -11,18 +11,14 @@ private const val CITY_ID_EXTRA = "CITY_ID_EXTRA"
  */
 class WeatherInCityRoute(val city: City) {
 
+    constructor(intent: Intent) : this(
+        intent.getParcelableExtra<City>(CITY_ID_EXTRA)
+            ?: error("Incorrect CITY_ID_EXTRA extra in WeatherInCityRoute")
+    )
+
     fun getIntent(context: Context): Intent {
         return Intent(context, WeatherInCityActivity::class.java).apply {
             putExtra(CITY_ID_EXTRA, city)
-        }
-    }
-
-    companion object {
-        fun fromIntent(intent: Intent): WeatherInCityRoute {
-            return WeatherInCityRoute(
-                intent.getParcelableExtra(CITY_ID_EXTRA)
-                    ?: error("Incorrect CITY_ID_EXTRA extra in WeatherInCityRoute")
-            )
         }
     }
 }

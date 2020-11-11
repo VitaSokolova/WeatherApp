@@ -22,6 +22,8 @@ class DailyForecastDto(
     val windDirection: Double,
     @SerializedName("wind_speed")
     val windSpeed: Double,  // миль / ч
+    @SerializedName("the_temp")
+    val currentTemperature: Double, // градусы Цельсия
     @SerializedName("max_temp")
     val dayTemperature: Double, // градусы Цельсия
     @SerializedName("min_temp")
@@ -39,6 +41,7 @@ class DailyForecastDto(
             weatherState = WeatherStateMapper.map(weatherState),
             windDirection = WindDirection.getByDegrees(windDirection),
             windSpeed = SpeedConverter.convertMilesPerHourToMetersInSecond(windSpeed),
+            currentTemperature = currentTemperature,
             dayTemperature = dayTemperature,
             nightTemperature = nightTemperature,
             visibility = DistanceConverter.convertMilesToKilometers(visibility),

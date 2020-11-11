@@ -48,7 +48,7 @@ class WeatherInCityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_in_city)
-        val route = WeatherInCityRoute.fromIntent(intent)
+        val route = WeatherInCityRoute(intent)
         viewModel = ViewModelProvider(this, WeatherInCityViewModelFactory(route.city)).get(
             WeatherInCityViewModel::class.java
         )
@@ -134,8 +134,8 @@ class WeatherInCityActivity : AppCompatActivity() {
             forecastsViews[index].renderParams(
                 dailyForecast.date.dayOfWeek.getName(this),
                 dailyForecast.weatherState.getWeatherIcon(this),
-                dailyForecast.dayTemperature.roundToInt(),
-                dailyForecast.nightTemperature.roundToInt()
+                dailyForecast.dayTemperature,
+                dailyForecast.nightTemperature
             )
         }
     }
@@ -145,7 +145,7 @@ class WeatherInCityActivity : AppCompatActivity() {
 
         temperatureTv.text = resources.getString(
             R.string.degree_format,
-            it.dayTemperature.roundToInt()
+            it.currentTemperature
         )
 
         descriptionTv.text = it.weatherState.getWeatherDescription(this)

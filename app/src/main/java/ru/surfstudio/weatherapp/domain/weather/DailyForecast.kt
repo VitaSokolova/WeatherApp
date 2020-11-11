@@ -10,6 +10,7 @@ class DailyForecast(
     val weatherState: WeatherState,
     val windDirection: WindDirection,
     val windSpeed: Double,  // метры/секунду
+    val currentTemperature: Double, // градусы Цельсия
     val dayTemperature: Double, // градусы Цельсия
     val nightTemperature: Double, // градусы Цельсия
     val visibility: Double, // километры

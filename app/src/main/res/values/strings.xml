@@ -9,7 +9,7 @@
     <string name="wind">Ветер, м/с</string>
     <string name="visibility">Видимость, км</string>
 
-    <string name="degree_format">%d°</string>
+    <string name="degree_format">%.0f°</string>
 
     <string name="monday">Понедельник</string>
     <string name="tuesday">Вторник</string>

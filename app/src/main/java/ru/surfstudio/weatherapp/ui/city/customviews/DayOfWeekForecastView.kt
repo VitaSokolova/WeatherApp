@@ -34,8 +34,8 @@ class DayOfWeekForecastView @JvmOverloads constructor(
     fun renderParams(
         dayOnWeekName: String,
         icon: Drawable,
-        dayTemperature: Int,
-        nightTemperature: Int
+        dayTemperature: Double,
+        nightTemperature: Double
     ) {
         iconIv.isInvisible = false
 
