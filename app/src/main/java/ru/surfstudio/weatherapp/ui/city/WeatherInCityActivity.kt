@@ -12,7 +12,6 @@ import ru.surfstudio.weatherapp.domain.weather.DailyForecast
 import ru.surfstudio.weatherapp.ui.*
 import ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
 import ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
-import ru.surfstudio.weatherapp.ui.city.models.CityForecast
 import ru.surfstudio.weatherapp.ui.common.LoadStatus
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
