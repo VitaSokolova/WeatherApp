@@ -5,7 +5,7 @@ import org.threeten.bp.LocalDate
 /**
  * Прогноз на день
  */
-class DailyForecast(
+data class DailyForecast(
     val date: LocalDate,
     val weatherState: WeatherState,
     val windDirection: WindDirection,
