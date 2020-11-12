@@ -1,6 +1,7 @@
 package ru.surfstudio.weatherapp.ui.city
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -17,6 +18,8 @@ import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
 class WeatherInCityActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: WeatherInCityViewModel
 
     private lateinit var toolbar: Toolbar
     private lateinit var rootContainer: ViewGroup
@@ -39,12 +42,105 @@ class WeatherInCityActivity : AppCompatActivity() {
 
     private lateinit var forecastsViews: List<DayOfWeekForecastView>
 
+    private val decimalFormat = DecimalFormat().apply { maximumFractionDigits = 2 }
+    private val intFormat = DecimalFormat().apply { maximumFractionDigits = 0 }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_in_city)
 
+        Log.v("WEATHER_APP", "Activity onCreate() is called")
+
+        val route = WeatherInCityRoute(intent)
+        viewModel = ViewModelProvider(
+            this,
+            WeatherInCityFactory(route.city)
+        ).get(WeatherInCityViewModel::class.java)
+
         findViews()
         initListeners()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.cityLiveData.observe(this, { city ->
+            toolbar.title = city.name
+            Log.v("WEATHER_APP", "City new value observed")
+        })
+
+        viewModel.forecastLiveData.observe(this, { forecast ->
+            when (forecast.loadStatus) {
+                LoadStatus.LOADING -> renderLoadingState()
+                LoadStatus.NORMAL -> {
+                    forecast.getTodayForecast()?.let {
+                        renderTodayForecast(it)
+                    }
+                    renderNextFiveDaysForecast(forecast.getNextFiveDaysForecasts())
+                    Log.v("WEATHER_APP", "WeatherInCityUi new value observed")
+                }
+                LoadStatus.ERROR -> renderErrorState()
+            }
+        })
+    }
+
+    private fun renderLoadingState() {
+        descriptionTv.text = resources.getString(R.string.loading_text)
+        renderStubs()
+    }
+
+    private fun renderErrorState() {
+        descriptionTv.text = resources.getString(R.string.error_text)
+        renderStubs()
+    }
+
+    private fun renderStubs() {
+        weatherParamsViews.forEach { it.renderEmptyState() }
+        forecastsViews.forEachIndexed { index, view ->
+            val dayName = LocalDate.now().plusDays(index + 1L).dayOfWeek.getName(this)
+            view.renderEmptyState(dayName)
+        }
+    }
+
+    private fun renderTodayForecast(forecast: DailyForecast) {
+        rootContainer.background = forecast.weatherState.getWeatherBackground(this)
+
+        temperatureTv.text =
+            resources.getString(R.string.degree_format, forecast.currentTemperature)
+        minMaxTv.text = resources.getString(
+            R.string.min_max_text_format,
+            forecast.dayTemperature,
+            forecast.nightTemperature
+        )
+        descriptionTv.text = forecast.weatherState.getWeatherDescription(this)
+        descriptionTv.setStartCompoundDrawable(forecast.weatherState.getWeatherIcon(this))
+
+        humidityTv.renderParams(
+            "${forecast.humidity}%",
+            forecast.humidity / 100.0
+        )
+        airPressureTv.renderParams(
+            decimalFormat.format(forecast.airPressure),
+            forecast.getAirPressureInPercents()
+        )
+        windTv.renderParams(
+            "${forecast.windDirection.getAbbreviation(this)}, ${intFormat.format(forecast.windSpeed)}",
+            forecast.getWindSpeedInPercents()
+        )
+        visibilityTv.renderParams(
+            intFormat.format(forecast.visibility),
+            forecast.getWindVisibilityInPercents()
+        )
+    }
+
+    private fun renderNextFiveDaysForecast(forecasts: List<DailyForecast>) {
+        forecasts.forEachIndexed { index, forecast ->
+            forecastsViews[index].renderParams(
+                dayOnWeekName = forecast.date.dayOfWeek.getName(this),
+                icon = forecast.weatherState.getWeatherIcon(this),
+                dayTemperature = forecast.dayTemperature,
+                nightTemperature = forecast.nightTemperature
+            )
+        }
     }
 
     private fun findViews() {
