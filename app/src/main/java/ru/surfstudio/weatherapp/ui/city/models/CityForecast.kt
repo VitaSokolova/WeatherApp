@@ -5,7 +5,7 @@ import ru.surfstudio.weatherapp.domain.weather.DailyForecast
 import ru.surfstudio.weatherapp.ui.common.LoadStatus
 import ru.surfstudio.weatherapp.ui.common.LoadableData
 
-class CityForecast(
+data class CityForecast(
     val forecast: List<DailyForecast>? = null,
     override val loadStatus: LoadStatus
 ) : LoadableData {

@@ -13,7 +13,7 @@ import ru.surfstudio.weatherapp.ui.city.models.CityForecast
 import ru.surfstudio.weatherapp.ui.common.LoadStatus
 
 /**
- * ViewModel я экрана погоды в городе [WeatherInCityActivity]
+ * ViewModel экрана погоды в городе [WeatherInCityActivity]
  */
 class WeatherInCityViewModel(
     private val forecastRepository: ForecastRepository,
