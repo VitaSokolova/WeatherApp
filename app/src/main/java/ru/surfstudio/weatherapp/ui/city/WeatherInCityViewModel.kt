@@ -10,10 +10,10 @@ import io.reactivex.schedulers.Schedulers
 import ru.surfstudio.weatherapp.domain.City
 import ru.surfstudio.weatherapp.services.ForecastRepository
 import ru.surfstudio.weatherapp.ui.city.models.CityForecast
-import ru.surfstudio.weatherapp.ui.common.LoadStatus
+import ru.surfstudio.weatherapp.ui.common.data.LoadStatus
 
 /**
- * ViewModel экрана погоды в городе [WeatherInCityActivity]
+ * ViewModel of weather in city screen [WeatherInCityActivity]
  */
 class WeatherInCityViewModel(
     private val forecastRepository: ForecastRepository,
@@ -43,7 +43,7 @@ class WeatherInCityViewModel(
                         _forecast.setValue(CityForecast(forecast, LoadStatus.NORMAL))
                     }
                 ) { throwable ->
-                    Log.e("NETWORK ERROR", throwable.message + throwable.stackTraceToString())
+                    Log.e("NETWORK ERROR", throwable.message + throwable.stackTrace.toString())
                     _forecast.setValue(CityForecast(loadStatus = LoadStatus.ERROR))
                 }
         )

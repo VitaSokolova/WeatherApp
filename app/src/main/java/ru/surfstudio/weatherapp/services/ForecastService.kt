@@ -8,7 +8,11 @@ import ru.surfstudio.weatherapp.services.common.FORECAST_URL
 import ru.surfstudio.weatherapp.services.dto.DailyForecastDto
 import ru.surfstudio.weatherapp.services.dto.SixDaysForecastDto
 
-public interface ForecastService {
+/**
+ * Retrofit interface for downloading weather forecasts from the web
+ */
+interface ForecastService {
+
     @GET(FORECAST_URL)
     fun getFiveDaysForecast(@Path("cityId") cityId: String?): Single<SixDaysForecastDto>
 }

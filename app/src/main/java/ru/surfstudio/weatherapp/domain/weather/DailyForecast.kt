@@ -3,7 +3,18 @@ package ru.surfstudio.weatherapp.domain.weather
 import org.threeten.bp.LocalDate
 
 /**
- * Прогноз на день
+ * Daily forecast
+ *
+ * @property date of forecast
+ * @property weatherState
+ * @property windDirection intercardinal and cardinal direction
+ * @property windSpeed in meters per second
+ * @property currentTemperature on the Celsius scale
+ * @property dayTemperature on the Celsius scale
+ * @property nightTemperature  on the Celsius scale
+ * @property visibility maximum visible distance in kilometers
+ * @property humidity in percents
+ * @property airPressure in millimetres of mercury
  */
 data class DailyForecast(
     val date: LocalDate,
@@ -13,9 +24,9 @@ data class DailyForecast(
     val currentTemperature: Double, // градусы Цельсия
     val dayTemperature: Double, // градусы Цельсия
     val nightTemperature: Double, // градусы Цельсия
-    val visibility: Double, // километры
-    val humidity: Int, // %
-    val airPressure: Double // мм. рт. ст.
+    val visibility: Double,
+    val humidity: Int,
+    val airPressure: Double
 ) {
 
     fun getWindSpeedInPercents(): Double = windSpeed / MAX_WIND_SPEED_IN_METERS_PER_SECOND

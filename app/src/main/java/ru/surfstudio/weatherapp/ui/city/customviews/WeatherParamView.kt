@@ -14,7 +14,7 @@ import androidx.core.content.withStyledAttributes
 import ru.surfstudio.weatherapp.R
 
 /**
- * Custom View для отображения параметра погоды
+ * Custom View for displaying the weather parameter using text, hint and progress bar
  */
 class WeatherParamView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,

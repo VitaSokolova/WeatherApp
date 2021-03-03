@@ -4,21 +4,22 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
-import androidx.core.graphics.alpha
 import ru.surfstudio.weatherapp.R
-import kotlin.math.max
-import kotlin.math.min
 
+/**
+ * Custom view with vertical progress bar
+ *
+ * @property progress indicates the percent of progress bar filling (in range  0..100)
+ */
 class ProgressBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private var progressBkgColor: Int = ContextCompat.getColor(context, R.color.white40)
+    private var progressBkgColor: Int = ContextCompat.getColor(context, R.color.white_40)
     private var progressColor: Int = ContextCompat.getColor(context, R.color.white)
     private var cornerRadius: Float =
         resources.getDimensionPixelSize(R.dimen.progress_bar_corner_radius).toFloat()
@@ -27,7 +28,7 @@ class ProgressBar @JvmOverloads constructor(
 
     var progress: Double = .0
         set(value) {
-            field = min(value, 100.0)
+            field = value.coerceIn(.0, 100.0)
             invalidate()
         }
 
@@ -35,13 +36,12 @@ class ProgressBar @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.ProgressBar) {
             progressBkgColor = getColor(
                 R.styleable.ProgressBar_backgroundColor,
-                ContextCompat.getColor(context, R.color.white40)
+                ContextCompat.getColor(context, R.color.white_40)
             )
             progressColor = getColor(
-                R.styleable.ProgressBar_backgroundColor,
+                R.styleable.ProgressBar_progressColor,
                 ContextCompat.getColor(context, R.color.white)
             )
-
             cornerRadius = getDimensionPixelSize(
                 R.styleable.ProgressBar_cornerRadius,
                 resources.getDimensionPixelSize(R.dimen.progress_bar_corner_radius)
@@ -55,7 +55,7 @@ class ProgressBar @JvmOverloads constructor(
     }
 
     /**
-     * Рисует незаполненный прогресс бар на фоне
+     * Draw a blank progress bar on the background
      */
     private fun drawBackground(canvas: Canvas) {
         paint.color = progressBkgColor
@@ -68,7 +68,7 @@ class ProgressBar @JvmOverloads constructor(
     }
 
     /**
-     * Рисует прогресс
+     * Draw progress rectangle
      */
     private fun drawProgress(canvas: Canvas) {
         paint.color = progressColor

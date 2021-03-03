@@ -10,6 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.surfstudio.weatherapp.R
 import ru.surfstudio.weatherapp.domain.City
 
+/**
+ * Adapter for cities list
+ *
+ * In real projects consider using EasyAdapter
+ * @see <a href="https://github.com/surfstudio/EasyAdapter">https://github.com/surfstudio/EasyAdapter</a>
+ */
 class CitiesListAdapter : RecyclerView.Adapter<CitiesListAdapter.CityViewHolder>() {
 
     private var cities: List<City> = emptyList()
@@ -35,11 +41,11 @@ class CitiesListAdapter : RecyclerView.Adapter<CitiesListAdapter.CityViewHolder>
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
         val city = cities[position]
-        holder.cityTv.text = city.name
-        holder.countryTv.text = city.country
-        holder.backgroundView.setCardBackgroundColor(Color.parseColor(city.colorHex))
-        holder.backgroundView.setOnClickListener {
-            onItemClickListener(city)
+        with(holder) {
+            cityTv.text = city.name
+            countryTv.text = city.country
+            backgroundView.setCardBackgroundColor(Color.parseColor(city.colorHex))
+            backgroundView.setOnClickListener { onItemClickListener(city) }
         }
     }
 

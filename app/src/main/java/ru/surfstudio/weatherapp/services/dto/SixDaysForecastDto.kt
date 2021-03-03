@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import ru.surfstudio.weatherapp.domain.weather.DailyForecast
 
 /**
- * Модель для маппинга прогноза на 6 дней
+ * Model for parsing the weather forecast for 6 days
  */
 class SixDaysForecastDto(
     @SerializedName("consolidated_weather")

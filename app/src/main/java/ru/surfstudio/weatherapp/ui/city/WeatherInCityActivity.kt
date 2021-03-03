@@ -3,20 +3,24 @@ package ru.surfstudio.weatherapp.ui.city
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import org.threeten.bp.LocalDate
+import org.threeten.bp.format.TextStyle
 import ru.surfstudio.weatherapp.R
 import ru.surfstudio.weatherapp.domain.weather.DailyForecast
 import ru.surfstudio.weatherapp.ui.*
 import ru.surfstudio.weatherapp.ui.city.customviews.DayOfWeekForecastView
 import ru.surfstudio.weatherapp.ui.city.customviews.WeatherParamView
 import ru.surfstudio.weatherapp.ui.city.models.CityForecast
-import ru.surfstudio.weatherapp.ui.common.LoadStatus
+import ru.surfstudio.weatherapp.ui.common.data.LoadStatus
 import java.text.DecimalFormat
-import kotlin.math.roundToInt
 
+/**
+ * Screen with detailed forecast in the city
+ */
 class WeatherInCityActivity : AppCompatActivity() {
 
     private lateinit var viewModel: WeatherInCityViewModel
@@ -34,6 +38,7 @@ class WeatherInCityActivity : AppCompatActivity() {
 
     private lateinit var weatherParamsViews: List<WeatherParamView>
 
+    // It is better to use RecyclerView in such case, but it is out of your agenda today
     private lateinit var day1ForecastView: DayOfWeekForecastView
     private lateinit var day2ForecastView: DayOfWeekForecastView
     private lateinit var day3ForecastView: DayOfWeekForecastView
@@ -48,6 +53,7 @@ class WeatherInCityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_in_city)
+
         val route = WeatherInCityRoute(intent)
         viewModel = ViewModelProvider(this, WeatherInCityViewModelFactory(route.city)).get(
             WeatherInCityViewModel::class.java
@@ -92,18 +98,25 @@ class WeatherInCityActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.city.observe(this, { city ->
-            toolbar.title = city.name
-        })
+        with(viewModel) {
+            city.observe(
+                this@WeatherInCityActivity,
+                Observer { city ->
+                    toolbar.title = city.name
+                }
+            )
 
-        viewModel.forecast.observe(this, { forecast ->
-            when (forecast.loadStatus) {
-                LoadStatus.NORMAL -> renderData(forecast)
-                LoadStatus.LOADING -> renderLoading()
-                LoadStatus.ERROR -> renderError()
-            }
+            forecast.observe(
+                this@WeatherInCityActivity,
+                Observer { forecast ->
+                    when (forecast.loadStatus) {
+                        LoadStatus.LOADING -> renderLoading()
+                        LoadStatus.NORMAL -> renderData(forecast)
+                        LoadStatus.ERROR -> renderError()
+                    }
+                }
+            )
         }
-        )
     }
 
     private fun renderLoading() {
@@ -113,13 +126,10 @@ class WeatherInCityActivity : AppCompatActivity() {
 
         val today = LocalDate.now()
         forecastsViews.forEachIndexed { i, view ->
-            val dayName = today.plusDays(i + 1L).dayOfWeek.getName(this@WeatherInCityActivity)
+            val day = today.plusDays(i + 1L).dayOfWeek
+            val dayName = day.getDisplayName(TextStyle.FULL, getCurrentLocale())
             view.renderEmptyState(dayName)
         }
-    }
-
-    private fun renderError() {
-        descriptionTv.text = resources.getString(R.string.error_text)
     }
 
     private fun renderData(forecast: CityForecast) {
@@ -127,17 +137,6 @@ class WeatherInCityActivity : AppCompatActivity() {
             renderTodayWeather(it)
         }
         renderOtherDaysForecasts(forecast)
-    }
-
-    private fun renderOtherDaysForecasts(forecast: CityForecast) {
-        forecast.getOtherDaysForecast().forEachIndexed { index, dailyForecast ->
-            forecastsViews[index].renderParams(
-                dailyForecast.date.dayOfWeek.getName(this),
-                dailyForecast.weatherState.getWeatherIcon(this),
-                dailyForecast.dayTemperature,
-                dailyForecast.nightTemperature
-            )
-        }
     }
 
     private fun renderTodayWeather(it: DailyForecast) {
@@ -173,5 +172,20 @@ class WeatherInCityActivity : AppCompatActivity() {
             intFormat.format(it.visibility),
             it.getWindVisibilityInPercents()
         )
+    }
+
+    private fun renderOtherDaysForecasts(forecast: CityForecast) {
+        forecast.getOtherDaysForecast().forEachIndexed { index, dailyForecast ->
+            forecastsViews[index].renderParams(
+                dailyForecast.date.dayOfWeek.getDisplayName(TextStyle.FULL, getCurrentLocale()),
+                dailyForecast.weatherState.getWeatherIcon(this),
+                dailyForecast.dayTemperature,
+                dailyForecast.nightTemperature
+            )
+        }
+    }
+
+    private fun renderError() {
+        descriptionTv.text = resources.getString(R.string.error_text)
     }
 }

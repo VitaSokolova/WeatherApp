@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">WeatherApp</string>
+    <string name="app_name" translatable="false">WeatherApp</string>
 
     <string name="cities_list_title">Города</string>
-    <string name="title_activity_weather_in_city">WeatherInCityActivity</string>
+    <string name="title_activity_weather_in_city" translatable="false">WeatherInCityActivity</string>
 
     <string name="humidity">Влажность</string>
     <string name="air_pressure">Давление, мм рт. ст.</string>
@@ -10,14 +10,6 @@
     <string name="visibility">Видимость, км</string>
 
     <string name="degree_format">%.0f°</string>
-
-    <string name="monday">Понедельник</string>
-    <string name="tuesday">Вторник</string>
-    <string name="wednesday">Среда</string>
-    <string name="thursday">Четверг</string>
-    <string name="friday">Пятница</string>
-    <string name="sunday">Суббота</string>
-    <string name="saturday">Воскресенье</string>
 
     <string name="clear_weather_state">Солнечно</string>
     <string name="light_clouds_weather_state">Малооблачно</string>
@@ -39,4 +31,13 @@
     
     <string name="loading_text">Погода загружается</string>
     <string name="error_text">Произошла ошибка.\nПопробуйте позже.</string>
+
+    <string name="mock_london">Лондон</string>
+    <string name="mock_great_britain">Великобритания</string>
+    <string name="mock_san_francisco">Сан-Франциско</string>
+    <string name="mock_usa">США</string>
+    <string name="mock_moscow">Москва</string>
+    <string name="mock_russia">Россия</string>
+    <string name="mock_rio">Рио-де-Жанейро</string>
+    <string name="mock_brazil">Бразилия</string>
 </resources>

@@ -1,7 +1,7 @@
 package ru.surfstudio.weatherapp.domain.weather
 
 /**
- *  Направление ветра
+ *  Wind direction in intercardinal and cardinal direction terms
  */
 enum class WindDirection {
     NORTH,

@@ -5,7 +5,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * Синглтон, живущий все время, пока приложение находится в работе, который хранит экземпляр Retrofit
+ * A singleton that lives the entire time the application is running,
+ * which stores an instance of Retrofit
  */
 object RetrofitHolder {
     val retrofit = Retrofit.Builder()

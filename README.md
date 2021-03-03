@@ -4,9 +4,21 @@
 
 Meetup recording is available on [YouTube](https://www.youtube.com/watch?v=fUscYm3M6U0 "YouTube")
 
-The repository contains a project with an application created during the Student Android workshop 11.11.2020. This meetup was about an easy way to build an architecture in an Android application. The main purpose was to encourage students to use discussed techniques and principles in their applications.
+The repository contains a project with an application created during the Student Android workshop 11.11.2020. 
 
-This is an example of dividing an application into layers, building MVVM architecture at the presentation layer, as well as working with the network and creating custom UI components.
+This meetup was about an easy way to build an architecture in an Android application. 
+The main purpose was to encourage students to use discussed techniques and principles in their applications.
+
+This is an example of:
+* dividing an application into layers according to Clean principles
+* building MVVM architecture at the presentation layer
+* having different layers of data midels (DTO models, domain models)
+* working with the network
+* creating custom UI components
+
+Possible improvements:
+* add DI
+* organize navigation by NavigationComponent
 
 
 [Design Link](https://www.figma.com/file/zYcj5os8WcoDmjeq2Bn0Vt/Weather-App-Workshop?node-id=5%3A183 "Ссылка на дизайн")

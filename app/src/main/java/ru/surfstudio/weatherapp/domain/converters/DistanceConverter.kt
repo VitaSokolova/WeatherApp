@@ -3,7 +3,7 @@ package ru.surfstudio.weatherapp.domain.converters
 private const val KILOMETERS_IN_MILE = 1.609344
 
 /**
- *  Утилитарный класс для конвертации мер длины
+ *  Utility class for converting measures of length
  */
 object DistanceConverter {
     fun convertMilesToKilometers(miles: Double): Double {

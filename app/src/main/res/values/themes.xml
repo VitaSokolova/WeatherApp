@@ -5,7 +5,7 @@
         <item name="android:windowBackground">@color/dark_gray</item>
 
         <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">@color/white40</item>
+        <item name="android:textColorSecondary">@color/white_40</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
@@ -16,7 +16,7 @@
     </style>
 
     <style name="ProgressBarStyle">
-        <item name="backgroundColor">@color/white40</item>
+        <item name="backgroundColor">@color/white_40</item>
         <item name="progressColor">@color/white</item>
         <item name="cornerRadius">@dimen/progress_bar_corner_radius</item>
     </style>

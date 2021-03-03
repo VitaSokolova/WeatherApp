@@ -7,7 +7,7 @@ import ru.surfstudio.weatherapp.domain.City
 private const val CITY_ID_EXTRA = "CITY_ID_EXTRA"
 
 /**
- * Навигация на экран с погодой в городе [WeatherInCityActivity]
+ * Route, which navigates to [WeatherInCityActivity]
  */
 class WeatherInCityRoute(val city: City) {
 

@@ -10,6 +10,9 @@ import android.widget.TextView
 import androidx.core.view.isInvisible
 import ru.surfstudio.weatherapp.R
 
+/**
+ * Custom View for displaying one day forecasr in list
+ */
 class DayOfWeekForecastView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

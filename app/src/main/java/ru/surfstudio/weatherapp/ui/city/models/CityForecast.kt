@@ -2,8 +2,8 @@ package ru.surfstudio.weatherapp.ui.city.models
 
 import org.threeten.bp.LocalDate
 import ru.surfstudio.weatherapp.domain.weather.DailyForecast
-import ru.surfstudio.weatherapp.ui.common.LoadStatus
-import ru.surfstudio.weatherapp.ui.common.LoadableData
+import ru.surfstudio.weatherapp.ui.common.data.LoadStatus
+import ru.surfstudio.weatherapp.ui.common.data.LoadableData
 
 data class CityForecast(
     val forecast: List<DailyForecast>? = null,

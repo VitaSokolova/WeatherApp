@@ -11,7 +11,7 @@ import ru.surfstudio.weatherapp.domain.converters.SpeedConverter
 import ru.surfstudio.weatherapp.services.mappers.WeatherStateMapper
 
 /**
- * Модель для маппинга прогноза погоды на день
+ * Model for parsing the weather forecast for the day
  */
 class DailyForecastDto(
     @SerializedName("applicable_date")
@@ -21,26 +21,27 @@ class DailyForecastDto(
     @SerializedName("wind_direction")
     val windDirection: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Double,  // миль / ч
+    val windSpeed: Double,  // mph
     @SerializedName("the_temp")
-    val currentTemperature: Double, // градусы Цельсия
+    val currentTemperature: Double, // on the Celsius scale
     @SerializedName("max_temp")
-    val dayTemperature: Double, // градусы Цельсия
+    val dayTemperature: Double, // on the Celsius scale
     @SerializedName("min_temp")
-    val nightTemperature: Double, // градусы Цельсия
+    val nightTemperature: Double, // on the Celsius scale
     @SerializedName("visibility")
-    val visibility: Double, // мили
+    val visibility: Double, // miles
     @SerializedName("humidity")
     val humidity: Int, // %
     @SerializedName("air_pressure")
-    val airPressure: Double // мбар
+    val airPressure: Double // mbar
 ) {
+
     fun transform(): DailyForecast {
         return DailyForecast(
             date = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE),
             weatherState = WeatherStateMapper.map(weatherState),
             windDirection = WindDirection.getByDegrees(windDirection),
-            windSpeed = SpeedConverter.convertMilesPerHourToMetersInSecond(windSpeed),
+            windSpeed = SpeedConverter.convertMilesPerHourToMetersPerSecond(windSpeed),
             currentTemperature = currentTemperature,
             dayTemperature = dayTemperature,
             nightTemperature = nightTemperature,

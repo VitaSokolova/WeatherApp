@@ -1,7 +1,9 @@
 package ru.surfstudio.weatherapp.domain.weather
 
 /**
- * Виды погоды
+ *  Weather states, supported in app
+ *
+ *  Each state has unique design
  */
 enum class WeatherState {
     CLEAR,

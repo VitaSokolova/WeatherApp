@@ -5,7 +5,7 @@ import ru.surfstudio.weatherapp.domain.weather.DailyForecast
 import ru.surfstudio.weatherapp.services.common.RetrofitHolder.retrofit
 
 /**
- * Репозиторий для загрузки прогноза погоды из сети
+ * Repository for downloading weather forecasts from the web
  */
 class ForecastRepository {
 

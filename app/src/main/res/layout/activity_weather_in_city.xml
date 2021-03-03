@@ -13,7 +13,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black20" />
+        android:background="@color/black_20" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -45,6 +45,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:drawablePadding="12dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_horizontal"
                 android:textAppearance="@style/Text.Regular.18.PrimaryColor"
                 tools:text="Малооблачно" />
 
@@ -63,7 +66,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="90dp"
                 android:layout_marginEnd="24dp"
-                app:cardBackgroundColor="@color/black50"
+                app:cardBackgroundColor="@color/black_50"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="0dp">
 
@@ -129,7 +132,7 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="26dp"
-                app:cardBackgroundColor="@color/black50"
+                app:cardBackgroundColor="@color/black_50"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="0dp">
 

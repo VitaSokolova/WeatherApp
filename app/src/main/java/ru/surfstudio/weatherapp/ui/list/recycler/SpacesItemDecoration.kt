@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 /**
- * Декоратор, для добавления отступов между ячейками в сетке
+ * Decorator, for adding padding between cells in the grid
  */
 class SpacesItemDecoration(
     private val space: Int,

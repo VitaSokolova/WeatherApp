@@ -1,16 +1,17 @@
 package ru.surfstudio.weatherapp.ui.list
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.surfstudio.weatherapp.R
+import ru.surfstudio.weatherapp.domain.City
 import ru.surfstudio.weatherapp.ui.city.WeatherInCityRoute
+import ru.surfstudio.weatherapp.ui.common.ResourcesProviderImpl
 import ru.surfstudio.weatherapp.ui.list.recycler.CitiesListAdapter
 import ru.surfstudio.weatherapp.ui.list.recycler.SpacesItemDecoration
-import java.util.logging.Logger
 
 private const val COLUMNS_NUMBER = 2
 
@@ -25,7 +26,11 @@ class CitiesListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities_list)
 
-        viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
+        val resourcesProvider = ResourcesProviderImpl(applicationContext)
+        viewModel = ViewModelProvider(this, CitiesListViewModelFactory(resourcesProvider)).get(
+            CitiesListViewModel::class.java
+        )
+
         findViews()
         initViews()
         initListeners()
@@ -37,28 +42,31 @@ class CitiesListActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(this, COLUMNS_NUMBER)
-        recyclerView.addItemDecoration(
-            SpacesItemDecoration(
-                resources.getDimensionPixelSize(R.dimen.cities_grid_padding),
-                COLUMNS_NUMBER
+        with(recyclerView) {
+            adapter = this@CitiesListActivity.adapter
+            layoutManager = GridLayoutManager(this@CitiesListActivity, COLUMNS_NUMBER)
+            addItemDecoration(
+                SpacesItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.cities_grid_padding),
+                    COLUMNS_NUMBER
+                )
             )
-        )
-
+        }
         supportActionBar?.setTitle(R.string.cities_list_title)
     }
 
     private fun initListeners() {
-        adapter.onItemClickListener = { city ->
-            // todo: переход на экран с погодой в городе
-            startActivity(WeatherInCityRoute(city).getIntent(this))
-        }
+        adapter.onItemClickListener = { navigateToCityForecastDetails(it) }
     }
 
     private fun observeViewModel() {
-        viewModel.citiesList.observe(this, { list ->
-            adapter.setCities(list)
-        })
+        viewModel.citiesList.observe(
+            this,
+            Observer<List<City>> { list -> adapter.setCities(list) }
+        )
+    }
+
+    private fun navigateToCityForecastDetails(city: City) {
+        startActivity(WeatherInCityRoute(city).getIntent(this))
     }
 }

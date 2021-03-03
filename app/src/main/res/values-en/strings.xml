@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="cities_list_title">Cities</string>
+    <string name="humidity">Humidity</string>
+
+    <string name="air_pressure">Pressure, mm Hg</string>
+    <string name="wind">Wind, m/sec</string>
+    <string name="visibility">Visibility, km</string>
+
+    <string name="degree_format">%.0f°</string>
+
+    <string name="clear_weather_state">Sunny</string>
+    <string name="light_clouds_weather_state">Partly cloudy</string>
+    <string name="heavy_clouds_weather_state">Heavy cloudiness</string>
+    <string name="rain_weather_state">Rain</string>
+    <string name="snow_weather_state">Snow</string>
+    <string name="thunder_weather_state">Thunder</string>
+
+    <string name="wind_abbreviation_north">N</string>
+    <string name="wind_abbreviation_south">S</string>
+    <string name="wind_abbreviation_west">E</string>
+    <string name="wind_abbreviation_east">W</string>
+    <string name="wind_abbreviation_northeast">NW</string>
+    <string name="wind_abbreviation_southeast">SW</string>
+    <string name="wind_abbreviation_southwest">SE</string>
+    <string name="wind_abbreviation_northwest">NE</string>
+
+    <string name="min_max_text_format">Max %.0f°, min %.0f°</string>
+
+    <string name="loading_text">Forecast is loading</string>
+    <string name="error_text">An error has occurred.</string>
+
+    <string name="mock_london">London</string>
+    <string name="mock_great_britain">Great Britain</string>
+    <string name="mock_san_francisco">San Francisco</string>
+    <string name="mock_usa">USA</string>
+    <string name="mock_moscow">Moscow</string>
+    <string name="mock_russia">Russia</string>
+    <string name="mock_rio">Rio de Janeiro</string>
+    <string name="mock_brazil">Brazil</string>
+</resources>
